@@ -265,7 +265,7 @@ extern int blk_update_nr_requests(struct request_queue *, unsigned int);
  */
 static inline int blk_do_io_stat(struct request *rq)
 {
-	return false;
+	return 0;
 }
 
 static inline void req_set_nomerge(struct request_queue *q, struct request *req)

@@ -2164,3 +2164,13 @@ config IO_STRICT_DEVMEM
 	  if the driver using a given range cannot be disabled.
 
 	  If in doubt, say Y.
+
+config WRITE_PRINTK_KMSG
+	bool "Write messages to kmsg"
+	default n
+	depends on PRINTK
+	---help---
+	  Allow user space to write logs to kmsg
+	  For example: init, apexd, SELinux
+
+	  If in doubt, say Y.

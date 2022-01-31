@@ -5341,7 +5341,6 @@ int panel_disp_param_send_lock(struct dsi_panel *panel, int param)
 	int rc = 0;
 	uint32_t temp = 0;
 	u32 fod_backlight = 0;
-	bool is_thermal_call = false;
 	struct dsi_panel_cmd_set cmd_sets = {0};
 	struct dsi_cmd_desc *cmds = NULL;
 	struct dsi_display_mode_priv_info *priv_info;

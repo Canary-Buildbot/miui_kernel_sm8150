@@ -39,7 +39,7 @@
  * The lower ZRAM_FLAG_SHIFT bits is for object size (excluding header),
  * the higher bits is for zram_pageflags.
  */
-#define ZRAM_FLAG_SHIFT 24
+#define ZRAM_FLAG_SHIFT (PAGE_SHIFT + 1)
 
 /* Flags for zram pages (table[page_no].flags) */
 enum zram_pageflags {
@@ -53,6 +53,15 @@ enum zram_pageflags {
 
 	__NR_ZRAM_PAGEFLAGS,
 };
+
+#define ZRAM_WB_IDLE_SHIFT (__NR_ZRAM_PAGEFLAGS)
+
+#define ZRAM_WB_IDLE_BITS_LEN (4U)
+
+#define ZRAM_WB_IDLE_MIN (1U)
+#define ZRAM_WB_IDLE_MAX (10U)
+
+#define ZRAM_WB_IDLE_DEFAULT ZRAM_WB_IDLE_MIN
 
 /*-- Data structures */
 
@@ -117,8 +126,8 @@ struct zram {
 	 * zram is claimed so open request will be failed
 	 */
 	bool claim; /* Protected by bdev->bd_mutex */
-#ifdef CONFIG_ZRAM_WRITEBACK
 	struct file *backing_dev;
+#ifdef CONFIG_ZRAM_WRITEBACK
 	spinlock_t wb_limit_lock;
 	bool wb_limit_enable;
 	u64 bd_wb_limit;

@@ -15881,8 +15881,8 @@ pld_deinit:
 
 	hdd_start_complete(errno);
 	/* Wait for any ref taken on /dev/wlan to be released */
-	while (qdf_atomic_read(&wlan_hdd_state_fops_ref))
-		;
+	while (qdf_atomic_read(&wlan_hdd_state_fops_ref));
+
 param_destroy:
 	wlan_hdd_state_ctrl_param_destroy();
 wakelock_destroy:
